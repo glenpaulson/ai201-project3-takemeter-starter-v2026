@@ -1,0 +1,533 @@
+Job hopped specifically to get away from a similar situation. There's no amount of documentation (management's recommendation) that can fix bad engineers. Sorry.
+
+Same situation here, and now we have endless documentation done but it's never enough
+
+
+I've found offshore is very good at reading documentation, but if it's not documented, they have a hard time figuring it out. Analytical skills aren't their forte, from my experience.
+
+I have had offshore developers near me for about 2 1/2 years and It is extremely painful. I have to take twice as long to explain things to them in the most granular terms, and then have to rewrite it anyways because it doesn’t meet the requirements. I hate it so much.
+
+
+
+This type of fraud is very common in ind. You can get a fake resume or fake degree for a couple of bucks and than get a job via reference that usually takes half your salary as a kick back.
+
+I hear you, brother. My former company gave a contract to TCS and they sent their "AI excellence center" to work on it (it was an AI use case) and they absolut shit they produced was insane. I had been doing a lot of AI work in our company in 2023/2024/2025 and the kind of absolutely embarrassing questions the lead AI engineers asked or the kind of basic questions they couldnt answer was absolutely pathetic.
+
+
+Why is your company so stupid that it is allowing itself to be scammed out of billions of dollars by a bunch of Indians with fake resumes?
+
+
+That’s going to be like that in almost all companies, same with mine. I constantly have to log on during offshore hours because they are not hitting deadlines and upstream teams are always complaining about it. Several times I noticed they don’t even log on during their mornings.
+
+You can bring it up with your manager. In my team, my manager cycle IND contractors out every month and have the CHN contractors look over their work. He can't control what contractor he gets, he can just kick them out of his team. He's IND himself, so he's well aware of the bullshit.
+
+
+One thing you'll learn throughout your career is this is extremely common, and not limited to off shore. You will run into many people that have well over a decade of experience over you, that will be completely incompetent.
+
+I went through exactly what you did for my new grad job. We had 1 onshore FTE that had I think 3 YOE who was our tech lead, we converted 1 offshore contractor to full time with 8 YOE at the same time they hired me with 0 YOE. And we had a team of I think 5 off shore, with experiences ranging 2-10 years-ish.
+
+Try this. Open a complex codebase in Claude. Ask it to explain some part of the code.
+
+It's not just syntax. It may not be real understanding. But, it's more than syntax.
+
+You underestimate just how dumb people are. There are SO many people who don't even understand how the file system works. SO many people who don't want to read. SO many people who don't like problem thinking.
+
+I don't think many people could successfully open a codebase without Claude. People are so disconnected with tech illiterates here. People are d u m b DUMB.
+
+
+I feel like some of these people posting shit like OP haven't used a paid model in years, if ever.
+
+
+that is called "analysis" AI is really good at analyzing existing things, but it cannot tell you what to build, and how to build it, because we build for human needs, to fix a problem, to improve something, and all that is tied to a human experience.
+
+But what your touching on is the deeper experience and broader thinking that piecing together an actual system needs. That too was something outsourcing often struggled to do and plain ole prompts saying "make this scalable won't cut it".
+
+For now, IMHO, AI does understand architecture and the roles/impact of most components. However it doesn’t understand how to fully leverage the relationship of each moving components.
+
+I agree with your general reasoning. But the problem is that you are mistaking the present for the future.
+
+except indians did replace americans in the software developer space. so you are admitting AI will replace them as well.
+
+
+"syntax", or notation, is a tool for thinking. Great mathematics/philosophers/computer scientists like Leibniz or Dijkstra obsessed over notation for a reason
+
+I love Leibniz, but he didn't invent calculus by throwing spaghetti at a wall and seeing what sticks, like people do with LLMs.
+
+
+
+  It is not surprising that people who "vibe code" entire projects often either fail to finish them or abandon them completely because the codebase becomes impossible to maintain. That is the ultimate trap of vibe coding: maintainability.
+
+Thats the same thing they said about offshore outsourcing. Still amounts to a lot less cs jobs for everyone in general.
+
+
+Idk man I pointed Sonnet at a complex niche game plugin I wrote that has tens of thousands of users and it refactored that shit to perfection and closed all the open issues in 30 mins. Would've taken me days as I had to relearn my shitty architecture lmao
+
+Yeah, no. That's cope. AI will replace whatever the capital paying for that AI wants to replace. The boards are drooling at the thought of replacing everyone with an army of agents.
+
+This is a pro AI post masquerading as an anti AI post. The truth is AI is an excellent tool, but needs to be supervised at a granular level. The more you let it do on its own, the higher the chance it makes a dumb assumption. Autonomy is not reliable, no matter what knobs you crank on the black box (otherwise known as prompting).
+
+Unbelievable cope. There is still currently a role for skilled humans steering the ship, but to say it’s just the syntax is insane. Clearly you have not let one of the models hill-climb performance optimizations, scale, etc. before.
+
+It is replacing code monkeys. I've seen a few and they didn't last
+
+
+Yet another confidently wrong answer about AI based on the state of AI 12 months ago, for a technology that's only 1.5 years old (counting from when agentic coding actually became usable) with a track record of making leaps every 4 months.
+
+
+
+AI is competent enough to produce a minimum viable product
+
+Not replacing but it can reduce the amount of developers, pms, and surrounding roles for companies for a project by 50-80%.
+
+
+After 30 yrs in software engineer and web development, I can tell you it absolutely is replacing developers and anyone who says otherwise simply doesn't know what they are talking about. Our company shrank our dept by just over half and we are doing the same work as before and in less time. We no longer hire Jr devs, only senior with loads of experience.
+
+Ai almost triggered a conflict between the US and China because it hallucinated items in a ships manifest this last spring.
+
+
+Claude has limitations but it’s also not just a syntax generator… I think the near future will favor developers who can get the most out of Claude while incurring the lowest amount of tokens and expense. That means really knowing your tool, really knowing your architecture, and REALLY knowing your business logic.
+
+Nope, it’s not only syntax. We manage a codebase which is around 300k loc, the other day I needed to make a refactor and in couple hours pr was ready around 7k +- changes. The ci was green, the cypress tests were green. It works as expected. If I had to do that by hand it would probably take me couple days or maybe even a week.
+
+
+I think a lot of companies don't have monetary budgets to train their members.
+
+A lot of places are like that, especially small teams. They count every dollar and training is first thing to get cut. But still, 50-60 bucks is nothing for a company, even a small one. If they can't afford that they got bigger problems.
+
+Or they say they'll give you the time and money for the training, but it's an in-person thing and T&E is a different budget so they can't pay for you to travel to the training.
+
+Just call customer support when CTO is on and bash him.
+
+
+Why do you even need a paid course? React might be one of the easiest things to learn for free given how much free content exists online.
+
+AI has been great for my React because I am bad at React. I see the mistakes AI makes in the backend because I’m good with the backend. I’m sure once I get skilled with React and lower level rendering concepts I will see what it does wrong there too.
+
+
+
+For me it's that I never spent time to learn css and styling. WIth AI, now I don't have to.
+
+
+How? You don't know when the slop machine is generating bad React, and you admit as much in the last sentence. So you generate code of dubious quality, you know it's dubious quality, and still do it. Bruh
+
+...I'm not exceptional in React... Then I asked CTO to buy me a course on Udemy... He said no You communicated fine. A $50 course costs less than one hour of a senior dev's time answering your React questions. He's cheap. Simple as that.
+
+
+
+I don't think you need to go deep into a course, just do a 1-hour React crash course on youtube, and do what the CTO said and schedule a 1-on-1 with a coworker who knows the codebase. I would refund that Udemy course if possible.
+
+
+
+Courses on Udemy are 50-60USD?? i buy them usually for 20 CAD.
+
+bro open ur ai and use it to learn you are not living in 2020 anymore
+
+
+The quality of online courses is pretty crap these days, you're better off just learning via sampling Github, YouTube, and AI. React is easy but vast and has lots of package-specific nuances and patterns you can't exactly pick up from these stupid courses without spending money and wasting time. This should not be necessary for upskilling.
+
+Beyond just budget stuff, at a lot of companies you can get hassled over buying things from and unapproved vendor. If Udemy isn't already set up and approved, it might not be worth the hassle for a $50 class.
+
+I'd definitely rather spend $50 of my own money than have to deal with corporate purchasing.
+
+
+There are so many free tutorials and things online
+
+Part of my job as a Sr dev is to train Jr devs. It's not just about the technical knowledge (in fact they often can figure that shit out on their own) but just making sure they are willing to come to me with questions can be challenging. I can be prickly at times so many managers need to urge their devs to talk to me (typically the devs that I find useless tell the other devs I'm an asshole and the devs I like tend to just come to me all the time, which you can argue is a bit of a self fulfilling prophecy but I will argue is a form of self selection).
+
+
+Don’t buy your own training unless you want to know it outside that job. It’s on the company to make sure you have the tools you need. 60 is 1 hour of work saved.
+
+Bro u can’t expect to be making 500k+ tc without ANY pressure
+
+There are countless jobs where people are grinding 60+ hour weeks for less than half the pay.
+
+A bit of interview prep and keeping up over the course of your career is needed in almost any high paying role.
+
+After getting a CS degree, doing CS for 2 decades, and making senior level, I still need to do about 50 hours of prep to pass a FAANG interview.
+
+It’s one of the main reasons I hate working in this field
+
+seconded, I haven't left my position (mostly because the market is crap) mainly because I despise the job hunting/interview process so much.
+
+yep. its not just the interviews. Its the work too. I'm a double major with accounting. My accountant friends talk about how boring some days are because they are doing the same things. I crave for some days like that. Not a day go by without me needing to google/ask ai how to do something, because its always something new!
+
+
+Because the other fields with similar payscales have standardised exams. Lawyers have their bar, doctors have medical license exams, finance has their CFA
+
+To be fair I would rather have a ridiculously difficult one-time exam than have to constantly prepare for interviews over and over again.
+
+
+
+The non stop learning is what makes the field brutal. For those who's hobby is tech tho its heaven for them. A coworker of mine is always non stop programming/learning
+
+
+I am one of those guys but I hate interviews as well. Preparing for interviews is not the same as keeping up with tech. It is totally different and mostly useless otherwise
+
+That's a trade off for being unregulated and having no certifications. 
+
+Well yes it requires rigorous prep, but it's not like other careers aren't rigorous in their own ways. It's not like you can party your ass and all of a sudden wake up an investment banker, lawyer, doctor. Tech is probably the easiest path to having an elite high paying job on par with those other profession as long as you prep for it.
+
+People still do prep for behavioral questions with STAR technique etc., but I guess if you are good at improvizing this is not required.
+
+Nope.... MD and DO professions are way harder. 1 chance to pass or your the MCAT, interview to get into the school is way more competitive, the step tests during school, the matching process, and the 10 year rigorous test to renew your practicing license until retirement are way harder.
+
+I'm saying, need to adjust expectations, rejections is normal, your DEFAULT ASSUMPTION should be that you won't hear back, that you're rejected, or your resume went into a black hole, until you're proven wrong with the official written offer letter in your hand
+
+
+
+Not really, rejection is part of life. You have to embrace it like death.
+
+
+Only the extremely privileged can live a life of pure comfort, everyone else has to deal with the realities of being human and interacting with others. Rejection is part of being human, don't take it personally. You only need one yes out of many no's to get what you want.
+
+
+
+solving it correctly but slow is actually a good sign, it means the gap is speed not knowledge. speed is just pattern recognition, so grind timed mediums and note which patterns eat your clock. one slow solve in a first round is noise, not a verdict on you
+
+The interview stage is the most soul sucking part of this career. Honestly there's no way out except to keep pushing through it.
+
+
+Passion comes and goes so I wouldn't stress about trying to recover it right now. You didn't mention if you're willing to relocate, something to consider if you've really exhausted every job posting in your city.
+
+Well, either you'll stop crying and continue or you'll talk about how you majored in CS once, it's a tough racket.
+
+The amount of failure and rejection I had to take to get to where I am was fucking ridiculous, but I'm doing pretty well now.
+
+Is moving cities an option? I also came from a mid size city with a rough tech scene. My job search would have been 1000x harder if I didn’t have geographic flexibility. I ended up moving 3 times my career and eventually settled in a large city (nyc)
+
+
+One failed interview soiled your "passion" for CS? then i doubt it was even really passion to begin with. Probably just motivation. You clearly dont have passion or love what you do so not much to say about this post.
+
+It’s pretty difficult getting a job in software engineering today, and will only get more difficult I imagine. I think you have positioned yourself in an interesting way, so I would consider leaning more in your more modern experience, maybe with a flair of AI, and go with that
+
+You've got a mix that most people never build and it's the kind of thing that matters more than just "can you code"
+
+
+
+good for you man. not everyone needs faang salary to be happy, 70k and remote is pretty nice setup honestly
+
+Focus on improving your soft skills when you start working. In my experience they matter way more than your technical skills (which are easy to learn) and will be a driving factor in your ability to create impact
+
+
+This is exactly what my manager told me. He said "I don't care if someone sucks at coding, that, I can fix. But I can't fix how they interact with the rest of the team"
+
+
+Switch teams the moment you realize you’re in a dysfunctional environment. You can’t change an org as a jr/mid level.
+
+In my country my stack is weak (Ruby on Rails), should have picked Java + Springboot or .Net, but is not so bad honestly
+
+
+
+
+The biggest game charger here is proficiency on Cloud platforms, good experience in AWS/Google/Azure when you are starting your career is the best booster. Make pet projects and deploy them on student/starter plans, you will be loved
+
+Build real shit.  Just build one, amazing solid project
+
+SWE with 15+ years of experience. Machining and/or welding would be my answer 
+
+Leaning backend and android, not focusing only one web frontend
+
+I switched to SWE after doing a PhD in physics, so my background is self-taught programming which is a little different
+
+
+You absolutely don't want to be the dev who fails deadlines and tell your scrum master the day of that it's not happening.
+
+Only FAANGbros (not actual FAANG employees) who are 1000 questions deep and memorized would want the current interview game, it is the dumbest thing ive seen
+
+We are quickly shifting away from leet-code type interviews, HR and everyone is loving these AI interviews because you can't grind them like leet-code. The idea is a pair programmer that really gives us the closest we can get to real world problems and how the engineer solves them.
+
+
+Same here. Leetcode was never reflective of real work. I remember so many people here defending the practice though because it's "scalable", as if that's the best requirement for an interview process.
+
+So now instead of a leetcode hard you’ll have to build an entire operating system with AI in under an hour.
+
+Instead of choosing to do the interview in Java/Python/JavaScript, you'll now choose from Claude/GPT/Gemini.
+
+
+Finally, grinding leetcode is like having a job. Fixing bugs in repo with ai assistant(with guardrails) is more aligned with actual work environment and more interesting.
+
+The problem of enormous candidate pools hasnt been solved so these will be just as hard to pass statistically as leetcode while not rewarding grit lmao
+
+
+If a company still expects you to write code in an interview, but while on the job they expect you to not write code and instead use AI, then you see how pointless leetcode style interviews are.
+
+
+"This is happening partly because we constantly have to learn new AI-related development tools, and partly because management pressures us to speed things up. Of course, no one can say no; "
+
+
+In the org I'm in,. the phrase I keep thinking in my head is "when will anyone in leadership take their foot off the gas ?"..
+
+Technology never eases anything it just then requires people to do more, slave like a robot. Reduce staff,get current staff to do more.
+
+
+it's not your fault man. it's the industry. it's the stock market. it's corporate greed. and the idiots that run it all. unsustainable growth will lead to unsustainable profit margins/upkeep in the long run. expanding until there's no room to work with.
+
+AI boosted productivity in some areas and massively impaired it in others. All in all I think it's probably a net negative in coding (and many other things to be honest).
+
+
+Expectations have gone up because the hiring market went to shit. This kicked off a good year or 18 months before LLMs could write anything even resembling working code.
+
+
+You’re right. The worst part is that I actually like how LLMs can simplify certain routine tasks—and i can focus on the important things —but because of all the pressure, I end up working on 4–5 tasks simultaneously and simply can't do it.
+
+
+Funny things - we produce so much code marketing and sales departs do not know how to sell it but business demands more :)
+
+So the point is. AI is just an excuse to build immense pressure on devs to work more and more. Everyone believes that and thus it works.
+
+Plus, AI makes you faster yes. But it only works so “well” because some companies (and many not as well!) are fine to produce non-quality slop and sell it. Main thing: fast.
+
+
+Their goal is to turn software engineering into a low-wage job with no benefits. And to blame anything that goes wrong on humans.
+
+Fire me and hire someone cheaper and always say yes, from a developing country—for a third of my salary for example.
+
+I do feel the pressure with everyone going so fast / dazzling leadership with proofs of concept that make a slower and steady but more grounded approach look bad.
+
+
+Did you try writing code in ChatGPT in 2022? I did, and it was still pretty useless for anything more complex than a fizz buzz program. 
+
+I would say like 2009 to 2024 was the golden age of software but I’m a bit biased in that 😄
+
+
+I got my start in that same year. I miss being able to spin up any free server stack and be able to do a lot of work on it, without paying a dime to a single big company, and running well on a very middle of the road PC.
+
+My guy you started in the new days. I'm genuinely shocked seeing 2022 as old days
+
+
+Homie said the old days 😂 dawg chatgpt didn't even exist when I was in college, we had to struggle involuntarily and rely on google/stack overflow for answers that may not even be correct or outdated
+
+The good old days were before leetcode and everywhere expected you to be an expert on 100 different frameworks.
+
+It was a golden age. It's insane that there were only like 2 decades in all of history where coding was mature and accessible and fun and fast before AI showed up.
+
+Yeah I wrote my first program in 1997 and got my first full time job coding in 2010. First program I wrote was in QBASIC.
+
+
+As opposed to the richness and variety that we are seeing today where everything is more or less an llm wrapper
+
+
+I feel this too. I missed getting into the weeds of a problem, struggling through it, and that satisfaction that comes along once everything clicked. I haven't felt that at work since they started forcing us to use AI
+
+Personally I just to side projects, programming problems(advent of code/everybody codes), and play different programming or factory type games to scratch that same itch.
+
+But how to write code was never the difficult or interesting problem (most of the times…).
+
+Spent the last year or so fine tuning my agents and now I’m spending so much more free time on myself. I can do some pretty advanced workflows right from my phone while I’m playing with my dog at the dog park. And all the while I’m killing it at work.
+
+
+Trust me tech adjacent non faang fortune 500 is where it's at. Incredibly chill and still high paying with very little turnover
+
+
+I'm there right now and can concur. Consulting is another option, I spent many years in that world. Best part was the ability to live just about anywhere while earning big coastal city money.
+
+
+A lot of hiring managers for embedded roles care more that you can actually talk through a project than where you did it, so lean into that in interviews.
+
+
+It depends on what you want to do. With cpp you can develop at the application level on an embedded Linux device or develop embedded firmware, and C wouldn’t be difficult to learn if you know cpp.
+
+I received a promotion from 75k to 92k recently after seniors left. So I don't think I'll be getting much for a while. I probably should have explained that in my post. Im probably under selling myself anyways, I need to just get a better mindset at work.
+
+My company offers lots of free education that I've been brushing off. Mainly because my heavy workload in the last 2 years. But I need to get past procrastinating first.
+
+Bro unless you REALLY want to work in person, keep the job. That's decent pay for fully remote. You will get raises when you prove that you can take ownership of those larger projects.
+
+
+Lol I got an offer from a company that has a lot of ex-Amazon leaders, and they seem to be an Amazon wannabe so I’m a bit sketched out
+
+I work at Adobe and I'm making around 250k fully remote. The wlb here is incredible, we have gotten every 3rd Friday off since COVID started and outside of on-call shifts I never work more than 35 hours a week. Can't recommend Adobe enough
+
+
+I've had jobs with similar pay where: I've been on call 24/7/365 & worked through every vacation I ever had; and others where I've worked 5 hours a week for months on end.
+
+
+I interviewed at Facebook very recently & the interviewer straight up told me that FB's WLB wasn't good, so not them?
+
+
+Any large non-tech company. Banks, insurance companies, big retail companies, vehicle manufacturers, etc. Basically any company that isn't directly selling their software or services.
+
+When I worked at defense contractor my boss pulled by aside my second day to let me know that he saw me leaving 30 minutes later than expected. Working over 8 hours a day caused contracts to be billed at higher rate.
+
+If a job will constantly require me to work 60+ per week, I need it to pay at least 2.5x my current salary. This is because burnout is a big deal and could be a career ender.
+
+I wouldn't even separate mental health from health here. They are really just as important.
+
+Personally if I’m in your boat, I would start a side hassle instead of changing jobs. 2hr per day vs 8+ hrs doesn’t seem comparable.
+
+Accenture, for example, is notorious for this - people go work there for 1+2 years to get the significant salary bump, take the L on a healthy life during their tenure, then leave the job for a more sustainable position laterally with a small salary bump.
+
+
+I don't know if it's burnout, long haul covid, or just my personality, but I hate working. Only way I'm working regular overtime is if my compensation is in the 2 comma club.
+
+Basically the money, for me, would go towards achieving some degree of early retirement. So investing time now so I have more time later would be worth it to me, but not at the expense of my family.
+
+
+Most parts of microsoft are known for very good WLB. Azure is not. AWS/GCP are also not known for good WLB. I'm less aware of other clouds like oracle/smaller ones.
+
+Yes, start-ups, especially pre/seed/A like to play these games.
+
+
+Here's a counter argument I saw. If AI is really a 10x productivity boost, where are the businesses getting 10 years of work done in one year? There should be AI-enabled businesses cleaning up in the market.
+
+Or, where are skyrocketing profits? Like Imagine you replace 100k$ payroll with 10k$ in tokens. That's 90k$ in profits. Where's all that?
+
+10x to overall delivery is currently incredibly unrealistic, but the productivity boost to coding is undeniable. Product just doesn't know how to prioritize initiatives that ultimately deliver 10x value to the customer.
+
+Most of my team is generating most/all code. But a lot of the requests are not “one shot” and requires changing. The agents are good but they sometimes design things in a non-ideal way that increases entropy or increases tech debt.
+
+
+Not to mention the sheer amount of output expected out of us now. Someone who has no dev experience isn't going to manage multiple branches locally as well as multiple remote branches from your coworkers all while not impacting prod.
+
+I’m a Python dev trying my hand at more C++ on my team, and my god how shit the AI is with reasoning about concurrency specifically is insane.
+
+Also business context. Even if the requests are “correct” from a technical perspective, there might be some context it didn’t consider and it requires changing.
+
+Honestly this has been a massive experiment at the company I work for (one of the big ones)
+
+
+Nobody but absolute psychopaths are going to fire up the AI and fire all their devs the next day. So, yes, actually quite a few CEOs have done just that and many now look like fools as they hire back ex-employees.
+
+And, naturally, our government leaders are asleep at the wheel and/or completely uninterested in being proactive about solving the problem.
+
+AI is going to take jobs by deskilling people to the point where they can't code.
+
+
+I recently spoke to a director of engineering at a mid size company and he said they only use AI for certain parts of dev process. The costs, even though they are currently subsidized, are too high for some of their bigger needs/wants so they are forming a team in 2027 to do the full revamp.
+
+For tooling I use agentic for safety critical production path code 100 percent hand written, Test cases I will often use ai.
+
+
+Yea, it sucks now, it is taking the job IMO. I can nearly finish nearly every jira ticket I’ve done the past month in one thread with opus 5.5
+
+
+I swear to god I'm going insane. It does not one shot my tickets, even after being given all the context I realistically can. It's often getting 80% of it and then I have to push HARD for the next 20% and then I ask it to rewrite the sloppy parts.
+
+No one I know in real life codes manually anymore. I mean "coding is largely solved" is technically correct when you just don't code anymore. Our job is to review the output.
+
+
+Coding agents are a developer tool. They make us way more efficient and that does mean that a lot of teams can get by with fewer developers. Some companies will opt to cut back on salaries. Mine is just saying "go faster, do more."
+
+
+The industry has to adapt and find a new path for junior employees and hiring overall is in temporary slump but things aren’t worse than in comparable periods in the past.
+
+Yes, the critical thinkers are the most valuable. There are always problems to solve, critical thinkers/engineers specialise in problem solving.
+
+Embedded is a good bet, AI still struggles hard with low-level code that actually has to talk to real hardware without blowing stuff up. The physical side you enjoyed from networking crosses over nicely there too.
+
+Yeah embbeded and networking is the two I'm mostly considering and enjoyed a lot the boring parts of networking were like configs and stuff like that.
+
+Not academia unless you don’t find work. But keep looking even if you do end up on that path. Don’t want to get stuck there.
+
+
+Data center networking is another option people seem to like for some stability. But I don’t know much about how to get into it.
+
+If you’re not getting interviews then that tells you something else - rewrite resume if it needs it. Apply to even easier jobs. Maybe adjacent roles.
+
+
+Not a bad option. Also apply to just general SWE roles for analytics teams as well. A lot of companies in Houston are building these out.
+
+
+Moving to Colombia is probably not career suicide, but it's certainly not something I'd advise if we're strictly talking about career and its implication on personal finances.
+
+
+Soft skills are required more than ever to get a job, id focus on that, learning AI is easy.
+
+This assumes that jira ticket is properly written and has everything that is needed to implement it, which isn't true most of the time.
+
+which honestly may be the best thing about this whole AI """revolution""". Just being a good smart coder isnt enough outweight being a massive asshole anymore.
+
+market's a mess but you can still get back in, 4 years of experience doesn't just vanish because one startup didn't work out
+
+I mean the latter is much more relevant for the job. Competitive programming is generally overkill for jobs, but if you enjoy it, I’m sure having a strong competitive programming baseline is great for not having to do dedicated leetcode prep when finding a new job
+
+
+These are not mutually exclusive and the reality is that companies want you to be familiar with AI. Come up with your own solutions. Then try to get the AI to implement it without explicit direction.
+
+Competitve programming and software engineeing is two very different skillset.
+
+I would say lot of people underestimate the power of understanding how your hardware works, I would start from such basics..
+
+If you build competitive programming skills, you might be able to develop using ai and not produce pure garbage. If you build competitive programming skills you might be useful to the Resistance 20 years from now.
+
+Depends on what your goal is. If you want to be really good at this career and build awesome algorithms you need to study algorithms and only algorithms. That’s actually this whole career if you think about it. All boils down to algorithms.
+
+
+
+
+The net result is shorter lunches on average, more team cohesion, and leftovers mean people can work late without having to worry about going home to cook + clean pans. Company loves this because they psychologically tricked us into voluntarily working longer/
+
+
+On my current social life, I basically spend my whole weekends going on Hinge dates (recently single) and I do side projects when I get home from them. I try not to stack more than 1 girl per day, since I find it a bit disingenuous and kinda stressful on the planning side.
+
+you start by 24hrs minus 8hrs of sleep then continue the math.
+
+
+  Most days I’m mentally exhausted by the time I’m done with work
+
+
+I think you’re right about this lol. I stress about meeting tight deadlines and delivering things quickly
+
+
+Are you working remotely? If not, I think nailing that down is the most important thing. I know that comes from a place of privilege to suggest that and realistically not everyone can achieve that.
+
+I actually do work remotely… maybe I’m just not prioritizing the right things. I still find that time is limited after being expected to be online 9-5 and get through tickets
+
+Same for me, I haven't done any coding outside of work since I've started working as I don't have the mental energy to do more coding after work
+
+you have 24h, minus 8h for sleep, you have 16h to work with, once you start assigning priorities you might surprise even yourself on what you deem to be important vs. not important
+
+as for cooking, its better to portion and pack the ingredients beforehand, so whenever u want to cook, everything is ready and its much faster
+
+
+Yeah you have to sacrifice something, since landing dev job I stopped the side projects etc. I wake up around 5am go for a run/workout, clean or take care of things around house, then begin work, then take care of business after work (errands, meal prep, etc). Social time comes maybe on the weekends.
+
+
+I have a hard time setting a consistent sleep schedule because I always push my bedtime later and later
+
+Do not extend your work beyond your compensated hours. Ever. If you can absolutely avoid it. 
+
+
+You don’t. You pick which ones you want to do today. And the next day, and the next day… you don’t have to do everything everyday you know.
+
+You simply can't. For starters, I am a firm believer that we don't really have that much energy in us for serious mental effort, 4 hours sounds about right.
+
+How can you make it work? Well, you can slack at work, incorporate some of your stuff into work (not directly working on your projects, but you often can do learning), have a "grinding" phase -- this comes at a great cost. And you will likely neglect other things.
+
+I'm not at your full list and probably won't be for a bit, until my kids generally sleep better. That's ok for me. Success is getting my heart rate up a few times a week, family meals having veggies and fruit, and not losing my job. Although having a 6-12 month safety net financially removes a ton of stress.
+
+Gym at work, food at work / eat out / order in, side projects and gaming on weeknights and weekends, social life thursday-saturday nights
+
+
+Work out early. Divide up the 8 work hours if you can. Never sacrifice sleep for anything. Eat well. Ditch side projects when one has to give. Ditch cooking when another has to give. Most importantly, don’t waste time on dumb shit like Redd…ah damn I fucked it up.
+
+A workout can be 30 minutes at home 3x per week. That will keep you in decent shape. Cooking takes an hour max in the evening. Even if you get home at 7pm, by 8pm you're free. You can also cook double so the next night you don't have to cook.
+
+Consistency is much more valuable anyway when it comes to side projects. Actually struggle to see how you don't have time for what you've listed unless you have kids or other commitments you didn't mention
+
+I work 4 days a week and I feel like I have a balanced life now with health and social life and some hobbies, but I still don't have time/energy for side projects.
+
+I don't do side projects ever and know 0 people in the industry who do them in their free time. I workout 3-4x a week because I prioritize it. I rarely get 8hrs of sleep but I have also had insomnia my entire adult life. I am married and my wife cooks a bit or we get easy to make prepped meals.
+
+
+The difference is between 200k chill job vs 450k intense job, that's what I'm currently debating between
+
+A 17% raise for “a lot more work” would probably get a no from people that have a fulfilling life outside of work.
+
+
+But most people just spend their extra free time scrolling on their phones. So they’d happily work more for more money.
+
+Yes this, I've never thought I could handle "more hectic and less work life balance" while in a challenging job. If I'm already being challenged, then I wouldn't be looking for more stress. But once I'm coasting, I'll consider the stress and the money that comes with it.
+
+While I agree, in this specific example going from 170k to 200k wont make you retire early. 19K after taxes difference per year is not ground breaking.
+
+I mean i used to feel the same, then I negotiated for a reduced work week (targeting 4 day week) and got real unlimited pto and use about 7 weeks a year.
+
+I don't think the difference between 170 and 200 is going to be the dealbreaker for FIRE (given you're not going to be taking home the entire 30k difference post-tax anyway at that income, plus FIRE is highly contextual to the living situation of each person)
+
+It would have to be north of 215k, and that’s assuming it’s fully remote, at a chill + stable company that hasn’t had lay-offs in the past 3 years, 25+ days of real PTO, and that the compensation is mostly/all base salary.
+
+
+you're right that a 17% raise isn't really worth that much in the long term - tbh it might be completely nullified by differences in benefits like 401k match and health insurance. it's really difficult to do a 1-1 comparison of "compensation" with roles that are that similar compensation wise.
+
+
