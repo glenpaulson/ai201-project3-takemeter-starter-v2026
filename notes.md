@@ -120,3 +120,73 @@ boundary.
 **Venting might be too small.** Lots of comments have a bit of
 frustration in them but are still making a point. If I make venting
 a label I need a rule for how much frustration is enough.
+
+---
+
+# Designing the labels (Milestone 2)
+
+I went with three labels: `advice`, `experience`, `claim`.
+
+I dropped the venting idea from my candidate list. There is a lot
+of venting in the sub but almost none of it is only venting, it is
+usually attached to a story or a point. So I folded it into
+`experience` instead of making it its own label.
+
+I also did not use `analysis` even though the starter file has it.
+Like I said in my reading notes, there are maybe 15 or 20 comments
+out of 184 that actually cite a checkable fact. That is not enough
+to train on.
+
+## Stress testing the definitions
+
+The milestone says to get an AI to write eight posts that sit on my
+boundaries and see if I can classify them. I did that with Claude.
+
+These eight are made up. They are only for testing the definitions.
+None of them go in labels.csv.
+
+| # | The test post | What I said | Was it clean? |
+|---|---|---|---|
+| 1 | Honestly just move. I did it and it worked out. | advice | yes |
+| 2 | I moved to Austin in 2021 and my salary went up 40k. | experience | yes |
+| 3 | Anyone in a dead-end team should move. The market rewards people who move. | ??? | **no** |
+| 4 | The market rewards people who move teams. | claim | yes |
+| 5 | I'm so tired of this industry. | ??? | **no** |
+| 6 | My manager told me soft skills matter more than code, and he's right, they matter more for everyone. | ??? | **no** |
+| 7 | Don't bother with leetcode. | advice | yes |
+| 8 | I've been doing this 15 years and the field has gotten worse. | ??? | **no** |
+
+So four out of eight I could not do cleanly. That is worse than I
+expected and I am glad I did this before labelling 200 things.
+
+### What was broken
+
+**Post 3.** My first definition of advice said it was aimed at the
+person who posted. But "anyone should do X" is still an instruction,
+it just isn't aimed at one person. I was going to have to decide this
+200 separate times.
+
+Fix: advice is any instruction, to the poster or to people in
+general.
+
+**Post 5.** My first definition of experience said it reports
+something that happened to the writer. But nothing happens in post 5.
+He is just tired. That is clearly not a claim about the industry
+though.
+
+Fix: experience also covers the writer's feelings, not just events.
+
+**Posts 6 and 8.** These start personal and end general. Both labels
+honestly fit and I went back and forth on both of them.
+
+Fix: I stole the tie-break idea from the staff taxonomy in
+data/staff_taxonomy.md. Whichever one takes up more words wins. It
+is not a perfect rule but it is a rule, and I can apply it the same
+way every time, which is the thing that matters.
+
+### After the fixes
+
+I ran the same eight again with the tightened definitions and got
+all eight. Post 3 is advice, post 5 is experience, post 6 is
+experience (the manager story is most of it), post 8 is claim (the
+15 years is four words, the conclusion is the rest).

@@ -54,37 +54,78 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `advice`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** Tells somebody to do something, either the original poster
+or people in general.
 
 **Example 1:**
->
+> Switch teams the moment you realize you’re in a dysfunctional environment.
+> You can’t change an org as a jr/mid level.
 
 **Example 2:**
->
+> If you’re not getting interviews then that tells you something else -
+> rewrite resume if it needs it. Apply to even easier jobs. Maybe adjacent
+> roles.
+
+### `experience`
+
+**Definition:** Reports the writer’s own situation, job, or feelings rather
+than making a general point.
+
+**Example 1:**
+> I received a promotion from 75k to 92k recently after seniors left. So I
+> don’t think I’ll be getting much for a while.
+
+**Example 2:**
+> I work at Adobe and I’m making around 250k fully remote. The wlb here is
+> incredible, we have gotten every 3rd Friday off since COVID started and
+> outside of on-call shifts I never work more than 35 hours a week.
+
+### `claim`
+
+**Definition:** States something general about the industry, the market, or
+the field.
+
+**Example 1:**
+> Their goal is to turn software engineering into a low-wage job with no
+> benefits. And to blame anything that goes wrong on humans.
+
+**Example 2:**
+> Technology never eases anything it just then requires people to do more,
+> slave like a robot. Reduce staff,get current staff to do more.
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `advice` and `experience`.
+
+These two keep landing on the same post because the normal way people give
+advice in this sub is to tell you their own story and let you draw the
+conclusion. This one is both at once and I could argue it either way:
+
+> Is moving cities an option? I also came from a mid size city with a rough
+> tech scene. My job search would have been 1000x harder if I didn’t have
+> geographic flexibility. I ended up moving 3 times my career and eventually
+> settled in a large city (nyc)
+
+Most of the words are his own story, but the first line is clearly telling
+the poster to consider moving.
 
 **The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
 
+If the post tells somebody to do something, it is `advice`, even if most of
+the post is the writer’s own story. The story is the support. The
+instruction is the point.
 
+So the post above is `advice`, because of the first line.
 
----
+Two more rules I needed after I stress-tested the definitions:
+
+- If there is no instruction, and the post is mostly about the writer’s own
+  situation or feelings, it is `experience`. Being tired or annoyed counts
+  even if nothing actually happened.
+- If there is no instruction, and the post tells a personal story and then
+  turns it into a general point, I go with whichever one takes up more words.
 
 ## The Dataset
 
