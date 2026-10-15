@@ -251,19 +251,50 @@ messiest label next unit, this is my first suspect.
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, seed 42, and
+max_length 128 tokens per post.
 
 **Anything I changed from the defaults, and why:**
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+Nothing. I left every setting where the notebook had it. My longest post is 557
+characters which is roughly 140 tokens, and my median post is about 40 tokens,
+so 128 only truncates one or two posts and raising it would have doubled the
+time and memory for text I don’t actually have.
 
+**What I trained on:** `cpu`. The notebook printed `cpu (CPU)` and torch
+`2.14.1+cpu`, and results.json records it. My machine does have an NVIDIA
+Quadro T1000, but the pip default on Windows is the CPU build of torch and the
+whole run takes a couple of minutes anyway, so I didn’t go chasing CUDA for it.
 
+**Split sizes:** 208 posts, split 70/15/15, which came out as **train 144 /
+val 32 / test 32**.
 
----
+| Label | Train | Val | Test |
+|---|---|---|---|
+| `advice` | 24 | 6 | 6 |
+| `experience` | 55 | 12 | 12 |
+| `claim` | 65 | 14 | 14 |
+
+`advice` has **6 examples in the test split**, which is under the 8 the course
+says you need before a per-label number means much. The notebook flagged it on
+its own. I had already written this down in The Dataset section before I
+trained anything, so it is a thing I predicted rather than a thing that
+surprised me.
+
+What I did not predict is how bad it would be. `advice` only got **24 training
+examples**, and the model never once predicted `advice` on the test set. Not a
+single time. It guessed `claim` for 29 of the 32 test posts and `experience`
+for the other 3.
+
+So the real problem turned out to be the training side, not the test side. I
+was worried about measuring `advice` on 6 posts. I should have been worried
+about teaching it from 24.
+
+I am leaving the numbers where they are. My criteria were committed before this
+run and the unit says the score isn’t what’s graded here, so changing anything
+now to make the result look better would just hide the finding.
 
 ## How I Used AI
 
