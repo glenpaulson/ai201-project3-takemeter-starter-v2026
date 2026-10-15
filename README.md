@@ -39,10 +39,22 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
+TakeMeter sorts comments from r/cscareerquestions into three kinds: `advice`,
+`experience`, and `claim`. The idea is to tell apart somebody telling you what
+to do, somebody describing their own job or situation, and somebody making a
+general statement about the industry.
 
+I picked that sub because it has a lot of long text and people argue constantly,
+and I picked those three labels because that is what people in there are
+actually doing. The thread titles are mostly questions like "should I take this
+offer", so I collected comments instead.
 
+It is a fine-tune of `distilbert-base-uncased` on 208 posts I collected and
+labelled myself.
+
+The short version of how it went: it doesn’t work yet. It gets 53% accuracy and
+never predicts `advice` at all. Why that happened is written up in The Training
+Run.
 
 ---
 
@@ -305,19 +317,63 @@ now to make the result look better would just hide the finding.
      workflow and disclosing it costs you nothing. Not disclosing it is the
      problem. -->
 
-**Moment 1**
+I used Claude throughout this project, so rather than pretend it was two small
+moments, the two below are the ones where what came back actually changed a
+decision I had made.
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+**Moment 1 — stress testing my label definitions (Milestone 2)**
 
-**Moment 2**
+- *What I asked for:* I gave it my three definitions and asked it to write eight
+  posts that would sit right on the boundaries between them, then tried to
+  classify those eight myself.
+- *What came back:* Eight posts, and I could only cleanly label four of them.
+  The four that broke were "anyone in a dead-end team should move" (an
+  instruction, but not aimed at one person), "I’m so tired of this industry"
+  (about the writer, but nothing actually happened), and two that started
+  personal and ended general.
+- *What I changed:* I added two rules. Advice covers instructions to people in
+  general, not just to the poster. Experience covers feelings and not just
+  events. And I took the word-count tie-break from the staff taxonomy for posts
+  that start personal and end general. Without this I would have hit all four
+  of those cases while labelling 200 posts and decided them differently each
+  time.
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+**Moment 2 — checking my criteria were actually checkable (Milestone 3)**
+
+- *What I asked for:* The milestone says not to let a model write your criteria,
+  so instead I asked whether each one could be verified by somebody who
+  couldn’t ask me what I meant.
+- *What came back:* Four were fine. My confidence criterion wasn’t. I had
+  written it as a threshold, something like "predictions the model is over 80%
+  sure about should be right 80% of the time", and it turns out the notebook
+  doesn’t report confidence that way at all. It sorts the test predictions and
+  reports accuracy for the most sure third and the least sure third.
+- *What I changed:* I rewrote criterion 5 as a gap between those two thirds
+  instead of a threshold. Then I worked out that 32 test posts means about 10
+  per third, so accuracy there only moves in steps of 10 points, and set the
+  target at 15 points so it needs at least 2 more correct. If I hadn’t checked,
+  I would have filed a criterion I had no way of producing a verdict for.
 
 **Pre-labelling disclosure:**
+
+Yes, I pre-labelled. The `note` column in labels.csv says which rows are which.
+
+- **20 rows marked `cold`** — I labelled these myself, no AI, before I had seen
+  any machine-generated label. Chosen at random across the whole file.
+- **6 rows marked `self`** — also mine, but I wasn’t being careful, so I didn’t
+  count them toward the cold check.
+- **182 rows marked `pre-labelled, checked`** — Claude labelled these using my
+  definitions and my decision rules. I read every one afterwards. I agreed with
+  all of them and didn’t change any.
+
+I also used Claude for the write-ups in this README, for a converter script
+(`make_labels.py`) that turns my raw collected text into labels.csv, and to set
+my labels in the notebook.
+
+The two things it did not do were pick my community and collect my posts, and
+label the cold 20. I did those, and I did the cold 20 before seeing any AI
+labels on purpose, because next unit’s agreement report is supposed to measure
+how consistent I am and it would measure nothing if I had looked first.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
