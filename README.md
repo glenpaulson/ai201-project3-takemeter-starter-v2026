@@ -894,26 +894,188 @@ is absorbing nine `experience` posts in one direction with none coming back.
 
 **What I changed:**
 
+I relabelled one boundary. Eleven posts moved from `claim` or `experience` to
+`advice`. Nothing else changed: same 208 posts, same three labels, same five
+criteria, same model, same hyperparameters, same three seeds.
+
+The eleven are tagged `relabelled unit 6` in the `note` column of
+`labels.csv`, so the change is auditable row by row.
+
+| | Before | After |
+|---|---|---|
+| `claim` | 93 (44.7%) | 84 (40.4%) |
+| `experience` | 79 (38.0%) | 77 (37.0%) |
+| `advice` | **36 (17.3%)** | **47 (22.6%)** |
+
+Criterion 3 still holds after the change: biggest label 40.4% against my 50%
+cap, smallest 22.6% against my 15% floor.
+
+**The boundary, and what I changed about it.** In unit 5 my rule said `advice`
+"tells somebody to do something". I read that literally: there had to be a real
+directive, an imperative or a "you should". A recommendation phrased as a fact
+about the world went to `claim`. So these went to `claim`:
+
+> "Embedded is a good bet, AI still struggles hard with low-level code..."
+
+> "Trust me tech adjacent non faang fortune 500 is where it's at."
+
+> "Any large non-tech company. Banks, insurance companies, big retail..."
+
+Every one of them is answering somebody who asked what to do. Under the broader
+reading they are all `advice`. I have now applied the broader reading, and I
+applied it to all eleven rather than to the ones I liked.
+
 **Which diagnosis pointed at it:**
+
+Criterion 2. `advice` scored F1 0.000 on all three seeds, which meant zero
+`advice` predictions across 96 held-out posts. My diagnosis named too few
+examples as the cause and named the mechanism: a labelling decision I made on
+purpose that moved eleven of the clearest `advice` shaped posts into the label
+that already had the most. I wrote then that I had made my thinnest class
+thinner to keep a rule clean. This undoes exactly that.
+
+The baseline is what made this the fix worth trying rather than a guess. An
+untrained model scores 0.286 on `advice` with bare label names and 0.312 with
+my definitions. Both beat my fine-tuned 0.000. The signal is in the text, so
+the problem is what I taught, not what can be learned.
+
+**What I expect to happen, written before I ran it**
+
+I do not expect this to fix the collapse, and I am recording that now so the
+result is a measurement rather than a hope.
+
+Eleven posts takes `advice` from 36 to 47. After a 70/15/15 split that is about
+**33 training examples instead of 24**. That is a 37% increase on a number that
+was already far too small. `claim` still has roughly 59 after the change. The
+imbalance that made dropping `advice` a cheap trade for the model is reduced,
+not removed.
+
+So my prediction is:
+
+1. `advice` F1 will still be **0.000 on at least one seed**, and I would not be
+   surprised by all three.
+2. Overall accuracy will move very little, within about 3 points either way,
+   because `claim` is still the majority label and the model's easiest strategy
+   has not changed much.
+3. If anything moves, it will be `claim` precision, because `claim` lost nine
+   of the posts it was absorbing.
+
+What this run actually measures is **how far relabelling alone can carry this
+problem**. If `advice` stays at 0.000 with 33 examples, then the honest reading
+is that the boundary was never the main constraint and the label simply needs
+more data, which is the one fix a relabelling cannot provide. That is a useful
+thing to establish, and it is the thing I would act on first next time.
 
 ### Run Log — After
 
+Same three seeds, same model, same settings. The only change is the eleven
+relabelled rows. Written by section 6 with `RUN_LABEL = "after"` into
+`results_three_seeds_after.json`.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | at least 0.60 | 0.562 | 0.656 | 0.406 | **MISSED** |
+| 2. Every label F1 (worst label shown) | at least 0.45 | 0.000 | 0.000 | 0.000 | **MISSED** |
+| 3. Biggest label at most 50%, smallest at least 15% | 50% / 15% | 40.4% / 22.6% | same file | same file | **MET** |
+| 4. Agreement with the staff set | at least 21 of 30 | 30/30 | 30/30 | 30/30 | **MET** |
+| 5. Confidence gap between thirds | at least 15 points | 50.0 | 70.0 | 40.0 | **MET** |
+
+### The two run logs side by side
+
+| Measure | Before | After | Change |
+|---|---|---|---|
+| Accuracy, seed 42 | 0.531 | 0.562 | +0.031 |
+| Accuracy, seed 7 | 0.625 | 0.656 | +0.031 |
+| Accuracy, seed 2024 | 0.562 | **0.406** | **-0.156** |
+| Mean accuracy | 0.573 | 0.542 | **-0.031** |
+| Mean macro F1 | 0.403 | 0.370 | **-0.033** |
+| Accuracy spread across seeds | 0.094 | **0.250** | **+0.156** |
+| F1 `advice`, all three seeds | 0.000 | 0.000 | no change |
+| F1 `experience`, seed 2024 | 0.526 | **0.000** | **-0.526** |
+| Criteria MET | 2 of 5 | 3 of 5 | +1 |
 
 **Did it help, and how do I know:**
 
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+**No. It made the model worse on average and much less stable, and it did not
+move the label it was aimed at.**
 
+Taking the three claims I committed before the run, in order:
 
+**Prediction 1 was right.** I said `advice` would still be 0.000 on at least one
+seed and possibly all three. It is 0.000 on all three, again, with zero `advice`
+predictions across 96 held-out posts. Going from 24 training examples to 33 did
+not get the label off the floor.
 
----
+**Prediction 2 was wrong, and interestingly wrong.** I said accuracy would move
+less than about 3 points either way. On seeds 42 and 7 it moved exactly that,
++0.031 on both. On seed 2024 it fell **15.6 points**, five times my stated
+bound. I was right about the typical case and had no idea the worst case was
+available.
+
+**Prediction 3 was wrong.** I said any real movement would show up in `claim`
+precision. `claim` barely moved. The label that moved was `experience`, up
+0.232 on seed 42 and up 0.086 on seed 7, then straight to **0.000 on seed
+2024**.
+
+**The headline number is the spread.** Accuracy moved 0.094 across seeds before
+and **0.250** after. The notebook flags anything over 0.10 as meaning the
+dataset is too small or too lopsided for a stable measure. Before the change I
+sat just under that line. After it I am at two and a half times it. One change
+of eleven rows, and the same model on the same data now returns anything from
+0.406 to 0.656 depending only on the draw.
+
+Seed 2024 shows what that looks like from the inside. The model predicted
+`claim` for **31 of 32** posts, `experience` once, `advice` never. Macro F1
+0.197. That is a near total collapse onto one label, and before the change that
+same seed was my middle result.
+
+### Why I think it failed
+
+The eleven posts I moved are, read as sentences, statements about the world:
+
+> "Embedded is a good bet, AI still struggles hard with low-level code..."
+
+> "Any large non-tech company. Banks, insurance companies, big retail..."
+
+They are only `advice` if you know they were answering somebody who asked what
+to do. That context is in the thread. It is not in the text, and the text is
+all the model gets.
+
+So I did not add eleven `advice` examples. I added eleven `claim` shaped
+sentences to `advice`, and removed nine of the cleanest `claim` examples from
+`claim`. `advice` already had an identifiable surface pattern in its imperatives
+and its "you should", and I diluted it. The donor label lost clean cases at the
+same time, which is the part I did not think about at all.
+
+That is consistent with everything the run produced: `advice` did not improve
+because the new examples do not look like `advice`, `claim` got slightly worse
+on two seeds out of three, and the whole thing became unstable because two of
+my three classes now have blurrier edges than they did.
+
+**The uncomfortable part is that this is an argument I already made and then
+overruled.** In unit 5 I chose the literal reading specifically because, in my
+own words, it "is visible in the text" while the broad one "depends on thread
+context the model never sees". In unit 6 I reversed that choice to get more
+examples. The experiment says the unit 5 reasoning was correct and the unit 6
+decision was not. I would rather have found that out by measuring it than kept
+believing it.
+
+### The one thing that did improve, and I do not fully trust it
+
+Criterion 5 flipped from MISSED to MET. The confidence gap went from 10, 50, 10
+to **50, 70, 40**, clearing my 15 point target on all three seeds for the first
+time.
+
+I am counting it as MET because that is what the numbers say. But I would not
+call it a win from the improvement. The model on seed 2024 answers `claim` for
+31 of 32 posts and still shows a 40 point gap between its most and least
+confident thirds, which tells me the criterion is measuring how well calibrated
+the confidence is **given** the predictions, not whether the predictions are any
+good. A model can be reliably confident about a bad answer.
+
+That is a flaw in my criterion rather than a success of my model, and it is the
+second thing this unit has taught me about criterion 5, after the 10 point
+granularity problem. It still stands as written and it is still MET.
 
 ## What's Still Broken
 
