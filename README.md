@@ -375,6 +375,54 @@ label the cold 20. I did those, and I did the cold 20 before seeing any AI
 labels on purpose, because next unit’s agreement report is supposed to measure
 how consistent I am and it would measure nothing if I had looked first.
 
+### Unit 6 update
+
+**Moment 3 — reading my own confusion matrix**
+
+- *What I asked for:* I gave Claude `results_three_seeds_before.json` and asked
+  what the matrix was actually saying, rather than asking whether the numbers
+  were good.
+- *What came back:* That my errors were entirely one directional. Nine real
+  `experience` posts were called `claim` on seed 42 and zero went the other
+  way, and the same asymmetry held on the other two seeds.
+- *What I changed:* I had been treating `advice` as my only problem because it
+  was the label sitting at 0.000. The direction of the `experience` errors
+  pointed at a second problem I had not noticed: the one pair in my taxonomy
+  with no written decision rule. That became a diagnosis in Verdicts and
+  Diagnoses and the second item in What's Still Broken.
+
+**Moment 4 — why my improvement failed**
+
+- *What I asked for:* After the retrain came back worse, I asked for an
+  explanation of why eleven more `advice` examples made the model less stable
+  rather than better.
+- *What came back:* That the eleven posts read as statements about the world,
+  and are only `advice` if you know which question they were answering. That
+  context lives in the thread and never reaches the model. So I had not added
+  eleven `advice` examples, I had added eleven `claim` shaped sentences to
+  `advice` while removing nine clean cases from `claim`.
+- *What I changed:* My write-up of the result. I had been about to record it as
+  "more data did not help", which would have been the wrong lesson. The actual
+  lesson is that the examples have to carry the signal the label is defined by,
+  and it matters enough that it changed what I would do next: collect posts
+  with real directives in them rather than reclassify the ones I have.
+
+**Disclosure for this unit**
+
+Claude labelled the 30 staff posts in `my_staff_labels.csv`. I did not label
+them myself. This is disclosed in full at the top of the Agreement Report,
+along with what it costs: my agreement rate measures Claude's consistency with
+staff rather than mine, so it cannot serve as evidence about whether my own 208
+labels were consistent. I diagnosed criterion 2 from the baseline comparison
+instead, and said so.
+
+Claude also ran the notebook for me, wrote the prose in this README, and
+checked my Milestone 1 and 2 numbers against the JSON files rather than against
+what I had typed.
+
+What I did myself in this unit was choose the improvement, and decide each
+verdict.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -1079,15 +1127,84 @@ granularity problem. It still stands as written and it is still MET.
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+Two criteria are still missed after the improvement, and they are the same two
+that were missed before it.
 
+### Criterion 2, every label at F1 0.45 or better
 
+Still missed, and in one respect worse. `advice` is at 0.000 on all three seeds
+after the change, exactly as it was before. `experience` now fails too, falling
+to 0.000 on seed 2024 where it had been 0.526.
+
+**What I would do.** Two things, in this order.
+
+First, collect 40 to 50 more `advice` posts, and be fussy about which ones.
+This unit taught me what kind. The eleven I relabelled were recommendations
+phrased as statements about the world, and adding them did nothing because the
+thing that makes them `advice` is not in the text. What I need is more posts
+that carry the signal `advice` actually has: an imperative, a "you should", a
+"don't". They exist in quantity in threads where somebody asks for help, and I
+know that because the 36 I already have came from there.
+
+Second, write a decision rule for `experience` against `claim`. My taxonomy has
+exactly one written rule and it covers `advice` against `experience`, which I
+had identified as my hardest pair. My confusion matrix says the pair the model
+cannot cross is the one I never wrote a rule for. I would write that rule first
+and then relabel against it, because relabelling without a rule is how I got
+the seven posts that landed in `claim` by elimination.
+
+**Why I stopped.** The unit allows one change and I spent it. I picked the
+relabel over collecting more posts because my diagnosis named the labelling
+decision as the mechanism, and because it cost no collection time. The run says
+that was the wrong trade: the diagnosis correctly identified that `advice` was
+starved, and I chose the fix that fed it the wrong food.
+
+### Criterion 1, overall accuracy of at least 0.60
+
+Still missed, at 0.562, 0.656 and 0.406.
+
+**What I would do.** Nothing directly. This one is downstream of criterion 2
+and I do not think it is worth attacking on its own. A model that never
+predicts one of three labels has a ceiling set by the other two, and mine is
+sitting near it. Fix `advice` and this moves without being targeted.
+
+**Why I stopped.** Same single change rule, and because chasing accuracy
+directly would most likely mean changing a training setting, which my diagnosis
+never pointed at.
+
+### Not missed, but not sound either
+
+Criterion 5 is MET after the change, at gaps of 50, 70 and 40 points. I am not
+listing it as broken because it passed. I am listing it here because I no
+longer believe it measures what I wrote it to measure. A model that answers
+`claim` for 31 of 32 posts should not be able to clear a calibration target,
+and mine does. The criterion tests whether confidence tracks correctness given
+the predictions, not whether the predictions are worth having.
+
+I have left it exactly as written, because the rule is that a criterion may be
+revised only when it could not be measured, and this one measured fine twice.
+It was badly designed, not unmeasurable.
+
+### The thing that worries me most, which no criterion covers
+
+My accuracy spread across seeds went from 0.094 to 0.250. Nothing in my five
+criteria tests stability, so this does not show up as a miss anywhere, and it
+is the number I would most want to fix. At a 0.250 spread, any single result I
+report is close to meaningless on its own. If I were writing criteria again I
+would spend one of the five on it.
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
 
-
+I meant the three labels to capture what a comment is **doing**, so that
+`advice` instructs, `experience` reports, and `claim` asserts, which is a
+distinction about the writer's purpose rather than their subject matter. What
+the model learned is that comments assert: across six training runs and 192
+held-out posts it predicted `advice` **zero times**, and my confusion matrix
+shows the remaining errors running one direction only, with nine real
+`experience` posts called `claim` on seed 42 and none coming back the other
+way, which says it never found a reason to treat a post as anything but general
+unless the wording forced it.
 
 <!-- ═════════════════════════════════════════════════════════════════════
 
