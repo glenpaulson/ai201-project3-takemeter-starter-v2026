@@ -531,6 +531,55 @@ labelling or the model.
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
+**The device these numbers came from:** `cpu`, reported as CPU, on torch
+2.14.1+cpu. Section 1 prints this and section 6 writes it into every entry of
+`results_three_seeds_before.json`. It matters because two people running this
+notebook on the same data with the same seed can get different numbers on
+different hardware, so the device is part of the result rather than a detail
+about my laptop.
+
+All three seeds ran in a single execution of section 6, so these are a
+comparable set. Each test split is 32 posts out of 208. Seed 42 reproduced the
+accuracy and macro F1 in my committed unit 5 `results.json` exactly, which
+tells me the run is repeatable on this machine.
+
+### The three seeds, as section 6 printed them
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.531 | 0.625 | 0.562 | 0.094 |
+| Macro F1 | 0.350 | 0.461 | 0.398 | 0.111 |
+| F1 for `advice` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 for `experience` | 0.400 | 0.700 | 0.526 | 0.300 |
+| F1 for `claim` | 0.651 | 0.684 | 0.667 | 0.033 |
+
+**What the spread tells me.** Accuracy moved 0.094 across the three seeds. The
+notebook's own reading is that this is enough that a criterion landing inside
+that band cannot really be called either way. It sits just under the ten point
+line, so I am not going to claim my dataset is too small on the strength of
+accuracy alone. But macro F1 moved 0.111, which is over the line, and the
+reason is visible one row further down.
+
+`experience` swung from 0.400 to 0.700 depending only on which posts landed in
+the test split. That is a 30 point swing on a label with 79 examples in the
+file and about 12 in each test split. Nothing about the model changed between
+those two runs. Only the draw did. So any statement I make about `experience`
+from a single split is a statement about luck, and this is exactly what running
+three seeds was supposed to expose.
+
+`claim` is the opposite. It moved 0.033 across all three, which is the one
+number here I would call stable.
+
+**The row that decides most of this unit.** `advice` scored **0.000 on all
+three seeds**. Not low, not jumpy, zero every time. I checked the prediction
+totals in `results_three_seeds_before.json` and the model predicted `advice`
+**zero times across all three runs**, on 96 test posts in total. This is not a
+seed being unkind. The model has dropped the label entirely, and three
+different splits all agree on that.
+
+<!-- Verdicts belong to Milestone 4, and criterion 4 needs the agreement check
+     from Milestone 3 before it can be filled in. -->
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
 | 1.  |  |  |  |  |  |
@@ -544,16 +593,39 @@ labelling or the model.
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
+Seed 42, printed by section 7 and typed in as text. Rows are the true labels,
+columns are what the model guessed.
+
+| true \ predicted | advice | experience | claim |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **advice** | 0 | 0 | 6 |
+| **experience** | 0 | 3 | 9 |
+| **claim** | 0 | 0 | 14 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
+
+**Nine real `experience` posts were called `claim`, and zero real `claim` posts
+went the other way.** That is completely one directional. The model has not
+learned a boundary between `experience` and `claim` that it crosses in both
+directions. It has learned to walk one way across it.
+
+Reading the whole matrix rather than just the worst cell makes it starker. The
+`advice` column is empty and the `experience` column holds 3. Everything else,
+29 of the 32 posts, was called `claim`. On the other two seeds the model
+predicted `claim` 24 and 25 times out of 32. So on all three splits it is doing
+something close to guessing my largest label and occasionally conceding an
+`experience`.
+
+My taxonomy says `experience` reports the writer's own situation and `claim`
+states something general about the industry. The direction of the errors says
+the model treats a post as general unless something forces it not to, and that
+nothing in my 208 examples taught it what that forcing thing is. The notebook
+flags this pattern as pointing at my labelling rather than at the model, which
+I cannot confirm from the matrix alone. That is what the agreement check in
+Milestone 3 is for, and I will come back to this in the diagnosis.
 
 
 
