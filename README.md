@@ -667,51 +667,99 @@ Milestone 3 is for, and I will come back to this in the diagnosis.
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+> **Disclosure: these 30 labels were produced by Claude, not by me.**
+>
+> I gave Claude the three staff definitions and the four decision rules from
+> `data/staff_taxonomy.md` and had it label all 30 posts. I did not label them
+> myself first.
+>
+> This matters for how the rate below should be read. The exercise is meant to
+> measure whether **I** can apply a written rule I did not write, which is the
+> only direct evidence available about whether my own 208 labels were
+> consistent. Because I did not do it, the rate measures Claude’s consistency
+> with staff and says nothing about mine. So where my diagnosis in Verdicts and
+> Diagnoses would normally lean on the agreement check to separate a labelling
+> problem from a model problem, it cannot, and I have said so there rather than
+> borrowing evidence this number does not carry.
+>
+> The adjudication of each disagreement below is mine.
 
-<!-- Nobody grades this number. A 60% who argues every disagreement from the
-     stated rules beats a 95% who wrote "staff was right" nine times. Several
-     of the 30 were chosen because they're genuinely ambiguous — you should be
-     winning some of these. -->
+**Agreement rate:** 30 / 30 = **100%**
+
+`agreement.py` found zero disagreements, so `agreement_results.json` holds an
+empty disagreements list.
 
 **Disagreements**
 
-<!-- Three lines each: the post, both labels, and who you think is right and
-     why — grounded in the staff definitions you were both applying.
+There are none. That is not a boast. It is the reason this section is worth
+less than it should be, and I would rather say that than pad it.
 
-     Then sort each into one of three piles:
-       (a) the rule covered it and I applied it loosely → a consistency problem
-       (b) the rule genuinely doesn't say               → a gap in the definitions
-       (c) the rule is ambiguous here and my reading is defensible → argue it.
-           This is a legitimate win.
+The graded part of this milestone is adjudicating disagreements, and a run with
+no disagreements produces no adjudication. Combined with the disclosure at the
+top of this section, that means the one instrument in this unit that can tell a
+labelling problem from a model problem produced nothing I can use.
 
-     Pile (a) is the one that matters most for your diagnosis: if you applied a
-     written rule two different ways on 30 posts, that is direct evidence about
-     what you did across your own 200. -->
+**Was the set easy, or is the rule genuinely tight?**
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+`agreement.py` asks this when the rate comes back at 100%, so here is the
+answer: neither, really.
 
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+The set was not easy. Staff marked 7 of the 30 as borderline in their own key,
+with notes saying so:
+
+| Post | Staff label | Why staff called it hard |
+|---|---|---|
+| sp_005 | `analysis` | Reads like a hot take for one clause, then two comparable numbers do the work |
+| sp_010 | `analysis` | Hedged conclusion, tiny sample, but the observation is what the claim rests on |
+| sp_014 | `hot_take` | The canonical rule 1 case. "so obviously" does the work, not the 3% |
+| sp_019 | `hot_take` | Reads reflective, almost `reaction`, but it is a general claim about everyone |
+| sp_020 | `hot_take` | Sounds observational and checkable in principle, but no count is given |
+| sp_028 | `reaction` | "Third this year" is countable, but nothing is argued from it |
+| sp_029 | `reaction` | Could be read as a wry take on shoe discourse, but it reports the writer’s own realisation |
+
+What the rate reflects is that `data/staff_taxonomy.md` is an unusually tight
+rule set. It gives three definitions, four ordered decision rules, and two
+worked examples. sp_014 is almost word for word the example printed under rule
+1. A rule set that specific leaves little room to drift, which is the opposite
+of the problem I have in my own taxonomy.
 
 **What the pattern in my disagreements tells me:**
 
+With no disagreements there is no pattern in them. But there is a pattern in
+where the difficulty was **predicted** versus where staff actually found it,
+and it is worth recording.
 
+Before the staff key was opened, nine posts were flagged as the hard ones:
+5, 10, 14, 17, 18, 21, 23, 27 and 29. Staff flagged seven: 5, 10, 14, 19, 20,
+28 and 29.
 
----
+| | Posts |
+|---|---|
+| Both agreed were hard | 5, 10, 14, 29 |
+| Staff found hard, I did not | 19, 20, 28 |
+| I found hard, staff did not | 17, 18, 21, 23, 27 |
+
+Every post in my own list came from one question: is this number load-bearing?
+17 has a year in it, 18 has a pace, 21 has four minutes, 23 has eight weeks, 27
+has twenty degrees. All of those sit on the `analysis` against `hot_take`
+boundary, which is rule 1.
+
+Staff’s extra three sit somewhere else entirely. 19 and 28 are the `reaction`
+against `hot_take` boundary, which is rule 2. 20 is a different distinction
+again: a claim that could be checked in principle but where no count is
+actually given, so the writer is asserting rather than showing.
+
+So the difficulty was looked for in one place and it was really in two. Rule 1
+is loud and easy to remember, so it got applied everywhere, including to posts
+it settles cleanly. Rule 2 is quieter and that is where the genuine ambiguity
+sat.
+
+That is the one transferable thing this exercise produced, and it points
+straight at my own taxonomy. My hardest boundary is `advice` against
+`experience`, and my written decision rule covers exactly that pair. The
+boundary I never wrote a rule for is `claim` against everything else, which is
+where seven posts ended up by elimination, and which my confusion matrix says
+is absorbing nine `experience` posts in one direction with none coming back.
 
 ## The Improvement
 
