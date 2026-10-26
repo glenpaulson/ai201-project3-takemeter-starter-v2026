@@ -582,11 +582,14 @@ different splits all agree on that.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | at least 0.60 | 0.531 | 0.625 | 0.562 | **MISSED** |
+| 2. Every label F1 (worst label shown) | at least 0.45 | 0.000 | 0.000 | 0.000 | **MISSED** |
+| 3. Biggest label at most 50%, smallest at least 15% | 50% / 15% | 44.7% / 17.3% | same file | same file | **MET** |
+| 4. Agreement with the staff set | at least 21 of 30 | 30/30 | 30/30 | 30/30 | **MET** |
+| 5. Confidence gap between thirds | at least 15 points | 10.0 | 50.0 | 10.0 | **MISSED** |
+
+Criteria 3 and 4 do not vary by seed. Criterion 3 is a property of `labels.csv`
+and criterion 4 is measured against the staff set, not against a split.
 
 ### Confusion matrix
 
@@ -638,26 +641,152 @@ Milestone 3 is for, and I will come back to this in the diagnosis.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy on the held-out set | at least 0.60 | **MISSED** | 0.531, 0.625, 0.562. Only seed 7 clears it. The target had to hold across all three and it held on one. |
+| 2 | Every label has an F1 of at least 0.45 | at least 0.45 | **MISSED** | `advice` scored 0.000 on all three seeds. `experience` also failed on seed 42 at 0.400. Only `claim` cleared it every time. |
+| 3 | Biggest label at most 50% of labels.csv, smallest at least 15% | 50% / 15% | **MET** | `claim` is 93 of 208 at 44.7%, `advice` is 36 of 208 at 17.3%. Checked from the file, not from a run, so no seed can move it. |
+| 4 | Agreement with the staff set | at least 21 of 30 | **MET**, with a caveat that matters | 30 of 30, so the arithmetic is unambiguous. But I did not produce those 30 labels, Claude did, and that is disclosed in the Agreement Report. The number is MET. The evidence is not mine. |
+| 5 | Most confident third beats least confident third | at least 15 points | **MISSED** | 10.0, 50.0, 10.0 points. Passed once and failed twice. |
 
 **Diagnoses**
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
+### Criterion 2, and it causes criterion 1
 
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
+I am taking these together because the second one is the first one's cause.
 
+`advice` has an F1 of **0.000 on all three seeds**. Its precision and recall are
+both 0, which does not mean the model guessed badly. It means the model made
+**zero `advice` predictions across all 96 held-out posts** in three different
+splits. It did not learn the label poorly. It stopped using it.
 
+That one fact also explains criterion 1. The prediction counts per seed are
+`claim` 29, 24 and 25 out of 32. A model that ignored every post and always
+said `claim` would score 0.4375, and mine averages 0.573. So about 13 points of
+my accuracy is real reading and the rest is the majority label.
 
----
+**The cause is too few examples for the label, and the reason there were too few
+is a labelling decision I made on purpose in unit 5.**
+
+Here is the evidence, in the order that convinced me.
+
+**First, the training counts.** The 70/15/15 split gives `advice` 24 training
+examples against `claim`'s 65. Dropping a label that only covers 17% of the file
+costs very little accuracy, and three independent splits all took that trade.
+That is consistent with too few examples, but on its own it is just a
+correlation.
+
+**Second, and this is the part that settles it: the untrained baseline does
+better.** `baseline.py` with bare label names and no training at all scores
+**0.286 on `advice`**. With my definitions it scores **0.312**. Both beat my
+fine-tuned model's 0.000.
+
+That rules out the explanation I would otherwise have reached for, which is that
+`advice` is simply not separable from text alone. A general model that has never
+seen one of my 208 posts can find it. The signal is in the text. My training
+data failed to teach a model that was looking right at it.
+
+**Third, the labelling decision.** In unit 5 I had to choose how literally to
+read my own rule that `advice` "tells somebody to do something". I chose the
+literal reading: there had to be an actual directive, an imperative or a "you
+should", and a recommendation stated as a fact about the world went to `claim`
+instead. I documented eleven posts that this moved, things like "Embedded is a
+good bet" and "tech adjacent fortune 500 is where it's at".
+
+I defended that choice at the time on the grounds that the literal rule is
+visible in the text and the broad one depends on thread context the model never
+sees. I still think that reasoning was right. But the consequence was that I
+took eleven of the clearest `advice` shaped posts out of a label that only had
+36 of them, and handed them to the label that already had the most. I made my
+thinnest class thinner to keep a rule clean.
+
+**What I cannot claim.** The honest competing explanation is that I applied the
+`advice` boundary inconsistently across my own 200, so there was no coherent
+pattern to learn. The agreement check is the instrument that separates those
+two, and because I did not label the staff set myself, it cannot do that here.
+So I am naming too few examples as the cause on the strength of the baseline
+comparison and the training counts, and recording that I have no direct evidence
+about my own consistency.
+
+### Criterion 2, the `experience` half
+
+`experience` fails only on seed 42, at 0.400 against the 0.45 target, then
+recovers to 0.700 and 0.526.
+
+The precision and recall tell a cleaner story than the F1 does.
+
+| Seed | Precision | Recall |
+|---|---|---|
+| 42 | 1.000 | 0.250 |
+| 7 | 0.875 | 0.583 |
+| 2024 | 0.714 | 0.417 |
+
+Precision is high and recall is low on every seed. When the model says
+`experience` it is almost always right. It just hardly ever says it. The posts
+it misses go to `claim`, and they go one way only: on seed 42 the matrix shows
+**9 real `experience` posts called `claim` and 0 real `claim` posts called
+`experience`**.
+
+**The cause is a boundary I never wrote a rule for.** My unit 5 taxonomy has one
+written decision rule and it covers `advice` against `experience`, which I had
+correctly identified as my hardest pair. I never wrote one for `experience`
+against `claim`, because I did not think that pair was hard. The matrix says it
+is the pair the model actually cannot cross.
+
+My own README gives the supporting evidence. I recorded before training that
+seven posts landed in `claim` "by elimination, not because the definition covers
+them", all of them people responding directly to another person. A label that is
+partly a container for leftovers is a label whose edge is soft, and the
+direction of these errors says the model treats a post as general unless
+something forces it not to.
+
+### Criterion 5
+
+The gaps were 10.0, 50.0 and 10.0 points against a target of 15.
+
+**The cause is partly the model and partly a flaw in how I wrote the
+criterion.**
+
+The model half: a classifier that answers `claim` for 24 to 29 of 32 posts is
+not varying its confidence in any meaningful way, so there is not much for the
+thirds to separate.
+
+The criterion half is my own fault and I would rather say it than let it pass.
+With 32 test posts each third holds 10, so accuracy within a third moves in
+steps of 10 points and the achievable gaps are 0, 10, 20 and so on. A target of
+"at least 15 points" cannot be hit exactly. It silently means "at least 20". I
+worked out the 10 post granularity when I wrote the criterion and still chose a
+number that falls between two achievable values.
+
+**That is not grounds for revising it.** The rule is that a criterion can be
+revised only if it could not be measured, and this one measured fine. It
+produced three clean numbers and a clear verdict. It was badly chosen, not
+unmeasurable, so it stays at 15 and stays MISSED.
+
+### Criterion 4, and why a MET is worth flagging
+
+The arithmetic is 30 of 30 against a target of 21, so MET is the correct verdict
+and I am not going to pretend otherwise.
+
+But the point of that criterion, written in unit 5, was this: *"if I cannot
+apply rules somebody else wrote at 70%, then I probably did not apply my own
+rules the same way across my 200 either."* It was never really about the number.
+It was the one measurement that could tell a labelling problem from a model
+problem.
+
+Claude produced those 30 labels, not me, which is disclosed in the Agreement
+Report. So the criterion is MET and its purpose is unserved. That is the single
+most expensive thing about this unit for me, because criterion 2 is exactly the
+question it was built to answer, and I had to diagnose that miss from the
+baseline comparison instead.
+
+### What the misses have in common
+
+Three of my five criteria missed, and two of the three come back to the same
+root. `advice` at 36 posts was too thin to survive a 70/15/15 split, and I made
+it thinner with a labelling rule I chose for clean reasons. Criterion 1 misses
+because criterion 2 misses. Criterion 5 misses partly because a model that has
+collapsed onto one label has no confidence structure left to measure.
+
+That points at one fix rather than four, which is what milestone 5 asks for.
 
 ## Agreement Report
 
