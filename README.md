@@ -387,20 +387,140 @@ how consistent I am and it would measure nothing if I had looked first.
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
      prints this table for you. -->
 
+Both models scored on the same 32 held-out posts, read from `test_split.csv`.
+The baseline is `facebook/bart-large-mnli` with no training, prompted with the
+three definitions in `label_definitions.txt`.
+
+The two commands I ran, in this order:
+
+```
+python baseline.py --trained results.json
+python baseline.py --definitions no_definitions_bare_names.txt --out baseline_results_bare_names.json
+```
+
+The second one points at a file that does not exist on purpose. That is how
+`baseline.py` falls back to bare label names, and it says so when it starts.
+
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.312 | 0.531 | +0.219 |
+| Macro F1 | 0.271 | 0.350 | +0.080 |
+| F1 for `advice` | 0.312 | 0.000 | -0.312 |
+| F1 for `claim` | 0.500 | 0.651 | +0.151 |
+| F1 for `experience` | 0.000 | 0.400 | +0.400 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
 
+Written before I ran `baseline.py` at all, so I had neither column in front of
+me except the 0.53 accuracy my own model already got in unit 5.
+
+I think the baseline will do fine on `claim` and badly on the other two. My
+`claim` definition says "states something general about the industry", and that
+is the kind of sentence a general model can spot from the words alone. But the
+line between `advice` and `experience` in my taxonomy is not in my definitions
+at all. It is in the decision rule I wrote underneath them, the one that says an
+instruction wins even when most of the post is the writer's own story. The
+baseline never sees that rule. It only gets the one line definition.
+
+So my guess is the baseline lands somewhere around 0.40 to 0.45 overall, and my
+trained model beats it by about 10 points, with the whole gap coming from
+`advice` and `experience` rather than from `claim`.
+
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+
+**How my prediction did:** right about `claim`, wrong about almost everything
+else. `claim` was indeed the baseline's best label in both runs, 0.500 with
+definitions and 0.667 with bare names, so that part held. But I predicted the
+baseline would land around 0.40 to 0.45 and that my trained model would beat it
+by about 10 points. Neither baseline landed in that range. One came in well
+under at 0.312, the other well over at 0.594, and the second one beat my trained
+model instead of losing to it. I also said the gap would come from `advice` and
+`experience`. `experience` was right. `advice` went the opposite way from what I
+said, and by a lot.
+
+The thing I got most wrong was an assumption I did not know I was making: that
+writing careful definitions would help a model that reads them. Measured, they
+hurt.
+
+**I ran the baseline twice, and the second run changes the answer.** The table
+above uses my written definitions as the prompt, which is what `baseline.py`
+does by default. I also ran it on purpose with bare label names, no definitions
+at all, just the words `advice`, `claim` and `experience`, to measure what my
+definitions were worth instead of assuming they were worth something.
+
+| Measure | Baseline, bare names | Baseline, my definitions | Trained |
+|---|---|---|---|
+| Overall accuracy | **0.594** | 0.312 | 0.531 |
+| Macro F1 | **0.512** | 0.271 | 0.350 |
+| F1 for `advice` | 0.286 | 0.312 | 0.000 |
+| F1 for `claim` | 0.667 | 0.500 | 0.651 |
+| F1 for `experience` | 0.583 | 0.000 | 0.400 |
+
+**My definitions made the baseline worse by 28 points of accuracy.** That is the
+opposite of what I assumed when I wrote them. With the definitions in the prompt
+the model called **26 of the 32 posts `advice`**, at a precision of 0.192, so it
+was wrong about five times out of six that it said it. It had collapsed onto one
+label.
+
+I think I know why, and it is a lesson about prompts rather than about my
+taxonomy. `baseline.py` slots each definition into the sentence `This post is
+{}.` My `advice` definition is *"tells somebody to do something, either the
+original poster or people in general"*, so the model is actually being asked
+whether *"This post is tells somebody to do something, either the original
+poster or people in general."* That is not a sentence. With bare names it gets
+*"This post is advice."*, which is, and the predictions spread out sensibly into
+19 `claim`, 12 `experience` and 1 `advice`, against a true split of 14, 12 and 6.
+
+So my definitions are written for a human reading the README, not for a model
+reading a prompt. They were never tested as a prompt until just now.
+
+**The headline, and it is not the one I wanted:** against the stronger of the two
+baselines, my fine-tuning added nothing. It lost. **0.594 against my trained
+model's 0.531 on accuracy, and 0.512 against 0.350 on macro F1**, on exactly the
+same 32 posts. A general model that has never seen one of my 208 labelled posts,
+given nothing but my three label names, beats the model I spent the last unit
+training.
+
+This is the case the milestone warns about, so I am saying it plainly rather
+than hiding behind the friendlier definitions column. **I am reporting the bare
+names run, 0.594, as my real baseline.** Judging myself against the definitions
+run would be picking the opponent I can beat.
+
+**The second thing I did not expect is `advice`.** My trained model scores
+**0.000** on it. Both baselines beat that, 0.286 with bare names and 0.312 with
+definitions, so on my smallest label the untrained model wins no matter which
+prompt it gets.
+
+I went back to the confusion block in `results.json` to check it was not a
+rounding artefact. All 6 `advice` posts in the held-out split were predicted
+`claim`, and the `advice` column is zero all the way down. My model does not
+predict `advice` at all, for any post. It did not learn the label badly. It
+learned to stop using it.
+
+That explains where its 0.531 comes from. `advice` is only 36 of my 208 posts,
+about 17%, so a model that never predicts it can still reach 83% of the file.
+Dropping a label it found hard is cheap in accuracy terms, and the training took
+that trade. The bare names baseline did not take it. It still predicted `advice`
+once, and when it did, it was right, at a precision of 1.000 on that one guess.
+
+**What this sets up for the rest of the unit.** Two of my criteria already look
+to be in trouble on seed 42, and I am writing that here rather than waiting to be
+surprised by it:
+
+* **Criterion 1** wants overall accuracy of at least 0.60 on all three seeds.
+  Seed 42 gave 0.531, and my baseline gives 0.594 without training at all.
+* **Criterion 2** wants every label at F1 0.45 or better on all three seeds.
+  `advice` is at 0.000. A label the model refuses to predict cannot miss by a
+  small margin.
+
+Milestone 2 runs three seeds, so one unlucky split is not what decides either of
+these. Milestone 4 is where I give them verdicts, and the agreement report from
+Milestone 3 is the instrument that tells me whether the `advice` collapse is my
+labelling or the model.
 
 
 
